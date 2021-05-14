@@ -1,4 +1,4 @@
-let candidates = [
+const candidates = [
   "未選択",
   "G186008",
   "G186024",
@@ -12,8 +12,7 @@ let candidates = [
 let number = 0;
 
 function setup() {
-  createCanvas(600, 200);
-  console.log(candidates.length);
+  createCanvas(windowWidth, windowHeight);
   textSize(60);
   textAlign(CENTER, CENTER);
   fill(0);
@@ -22,6 +21,14 @@ function setup() {
 function draw() {
   background(204);
   text(candidates[number], width / 2, height / 2);
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
+
+function deviceTurned() {
+  windowResized();
 }
 
 function mousePressed() {
