@@ -1,5 +1,4 @@
 const candidates = [
-  "未選択",
   "G186008",
   "G186024",
   "G186025",
@@ -9,7 +8,29 @@ const candidates = [
   "G186062"
 ];
 
-let number = 0;
+class Stack {
+  constructor(candidates) {
+    this.elements = Array();
+    this.shuffle(candidates);
+  }
+  shuffle(candidates) {
+    let tmpArray = candidates.slice();
+    while (tmpArray.length > 0) {
+      let random_number = Math.floor(Math.random() * tmpArray.length);
+      this.elements.push(tmpArray[random_number]);
+      tmpArray.splice(random_number, 1);
+    }
+  }
+  shift() {
+    if (this.elements.length <= 0) {
+      this.shuffle(candidates);
+    }
+    return this.elements.shift();
+  }
+}
+
+let number = '未選択';
+let stack = new Stack(candidates);
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -20,7 +41,7 @@ function setup() {
 
 function draw() {
   background(204);
-  text(candidates[number], width / 2, height / 2);
+  text(number, width / 2, height / 2);
 }
 
 function windowResized() {
@@ -32,9 +53,5 @@ function deviceTurned() {
 }
 
 function mousePressed() {
-  number = randomSelect();
-}
-
-function randomSelect() {
-  return Math.floor(Math.random() * (candidates.length - 1)) + 1;
+  number = stack.shift();
 }
