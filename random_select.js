@@ -8,7 +8,7 @@ const candidates = [
   "G186062"
 ];
 
-class Stack {
+class Queue {
   constructor(candidates) {
     this.elements = Array();
     this.shuffle(candidates);
@@ -21,7 +21,7 @@ class Stack {
       tmpArray.splice(random_number, 1);
     }
   }
-  shift() {
+  dequeue() {
     if (this.elements.length <= 0) {
       this.shuffle(candidates);
     }
@@ -30,7 +30,7 @@ class Stack {
 }
 
 let number = '未選択';
-let stack = new Stack(candidates);
+let queue = new Queue(candidates);
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -53,5 +53,5 @@ function deviceTurned() {
 }
 
 function mousePressed() {
-  number = stack.shift();
+  number = queue.dequeue();
 }
